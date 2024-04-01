@@ -1,0 +1,53 @@
+# Print a Grid: Colors
+BLUE_BOX: str = "\U0001F7E6"
+RED_BOX: str = "\U0001F7E5"
+WHITE_BOX: str = "\U00002B1C"
+
+# Establish a Secret
+grid_size = 4
+secret_row = 3
+secret_column = 2
+
+while True:
+    # User guess for row
+    guess_row = int(input("Guess a row: "))
+    
+ # Validate user input for row
+    while not 1 <= guess_row <= grid_size:
+        print(f"The grid is only {grid_size} by {grid_size}. Try again: ", end="")
+        guess_row = int(input())
+    
+ # User guess for column
+    guess_column = int(input("Guess a column: "))
+    
+ # Validate user input for column
+    while not 1 <= guess_column <= grid_size:
+        print(f"The grid is only {grid_size} by {grid_size}. Try again: ", end="")
+        guess_column = int(input())
+    
+ # Check if guess is a hit or a miss
+    if guess_row == secret_row and guess_column == secret_column:
+        print("Hit!")
+    else:
+        print("Miss!")
+
+# Print a Grid
+    for row in range(1, grid_size + 1):
+        row_string = ""
+        for col in range(1, grid_size + 1):
+            if guess_row == row and guess_column == col:
+                # Check if the guess matches the current position
+                row_string += RED_BOX if guess_row == secret_row and guess_column == secret_column else WHITE_BOX
+            else:
+                row_string += BLUE_BOX
+        print(row_string)
+
+ # Hint to Your User
+    if guess_row == secret_row and guess_column == secret_column:
+        break
+    elif guess_row == secret_row:
+        print("Close! Correct row, wrong column.")
+    elif guess_column == secret_column:
+        print("Close! Correct column, wrong row")
+    else:
+        print("Miss!")
